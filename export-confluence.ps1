@@ -21,7 +21,6 @@ foreach ($htmlFile in $htmlFiles) {
 
     $htmlContent = "<link rel='stylesheet' type='text/css' href='/styles/site.css' />`n" + $htmlContent
 
-    # Criar o conteúdo básico ASPX
     $aspxContent = @"
 <%@ Page Language="C#" AutoEventWireup="true" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
@@ -30,11 +29,9 @@ foreach ($htmlFile in $htmlFiles) {
 </asp:Content>
 "@
 
-    # Definir o nome do arquivo de saída .aspx
     $aspxFileName = [System.IO.Path]::ChangeExtension($htmlFile.Name, ".aspx")
     $aspxFilePath = Join-Path -Path $outputFolder -ChildPath $aspxFileName
 
-    # Salvar o conteúdo ASPX no arquivo de saída
     Set-Content -Path $aspxFilePath -Value $aspxContent -Force
 
     Write-Output "Página convertida: $aspxFilePath"
